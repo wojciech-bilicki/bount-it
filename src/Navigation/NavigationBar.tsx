@@ -6,12 +6,19 @@ const NavigationWrapper = styled.div`
   display: flex;
 `;
 
-const NavigationBar: React.FC = () => (
-  <NavigationWrapper>
-    <Link href="/">Ideas</Link>
-    <Link href="/add">Add Idea</Link>
-    <Link href="/my-account">My Account</Link>
-  </NavigationWrapper>
+const AppWrapper = styled.div``;
+
+const Layout: React.FC = (props) => (
+  <>
+    <NavigationWrapper>
+      <Link href="/">Ideas</Link>
+      <Link href="/add">Add Idea</Link>
+      <Link href="/my-account">My Account</Link>
+    </NavigationWrapper>
+    <AppWrapper>
+      {props.children}
+    </AppWrapper>
+  </>
 )
 
-export default NavigationBar;
+export default Layout;

@@ -1,19 +1,25 @@
-import { mount, route } from 'navi';
+import { mount, route, compose, withView } from 'navi';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-navi';
+import { Router, View } from 'react-navi';
 import { BOUNCE_IT_TOKEN_KEY } from './Auth/auth.api';
 import { withAuthentication } from './Auth/authenticatedRoute';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
-import IdeasPage from './Ideas/IdeasPage';
+import IdeasPage from './Ideas/IdeasList/IdeasListPage';
 import './index.css';
+import AddIdeaPage from './Ideas/AddIdea/AddIdeaPage';
+import Api from './common/Api';
 
 
 const routes = mount({
-  '/': withAuthentication( route({
+  '/': withAuthentication(route({
     title: 'Ideas',
     view: <IdeasPage />
+  })),
+  "/add": withAuthentication(route({
+    title: 'Add Idea',
+    view: <AddIdeaPage />
   })),
   '/login': route({
     title: 'Login',
@@ -25,6 +31,7 @@ const routes = mount({
   }),
 })
 
+Api.init();
 
 
 ReactDOM.render(<Router context={{

@@ -6,7 +6,7 @@ import { AuthForm } from './Auth.components';
 const App: React.FC = () => {
   let navigation = useNavigation();
 
-  const [{username, password}, setCredentials] = useState({
+  const [{ username, password }, setCredentials] = useState({
     username: '',
     password: ''
   })
@@ -20,7 +20,7 @@ const App: React.FC = () => {
       password
     })
 
-    if(response && response.error) {
+    if (response && response.error) {
       setError(response.error);
     } else {
       navigation.navigate('/')
@@ -34,7 +34,7 @@ const App: React.FC = () => {
         <input placeholder="Username" value={username} onChange={(event) => setCredentials({
           username: event.target.value,
           password
-        })}/>
+        })} />
         <label htmlFor="password">Password</label>
         <input placeholder="Password" value={password} onChange={(event) => {
           setCredentials({
