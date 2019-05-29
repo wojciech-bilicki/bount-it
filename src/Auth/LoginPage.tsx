@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigation } from 'react-navi';
-import { onLogin } from './auth.api';
+import { BOUNCE_IT_TOKEN_KEY, onLogin } from './auth.api';
 import { AuthForm } from './Auth.components';
 
 const App: React.FC = () => {
@@ -23,6 +23,7 @@ const App: React.FC = () => {
     if (response && response.error) {
       setError(response.error);
     } else {
+      navigation.setContext({token:  localStorage.getItem(BOUNCE_IT_TOKEN_KEY)})
       navigation.navigate('/')
     }
 
@@ -45,7 +46,7 @@ const App: React.FC = () => {
         <button type="submit">Login</button>
         {error && <p>Invalid username/password</p>}
       </AuthForm>
-      <Link href="register">Go to register</Link>
+      <Link href="/register">Go to register</Link>
     </div>
   );
 }

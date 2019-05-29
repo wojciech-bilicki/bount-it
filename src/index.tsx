@@ -1,15 +1,16 @@
-import { mount, route, compose, withView } from 'navi';
+import { mount, route } from 'navi';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, View } from 'react-navi';
+import { Router } from 'react-navi';
 import { BOUNCE_IT_TOKEN_KEY } from './Auth/auth.api';
 import { withAuthentication } from './Auth/authenticatedRoute';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
+import Api from './common/Api';
+import AddIdeaPage from './Ideas/AddIdea/AddIdeaPage';
 import IdeasPage from './Ideas/IdeasList/IdeasListPage';
 import './index.css';
-import AddIdeaPage from './Ideas/AddIdea/AddIdeaPage';
-import Api from './common/Api';
+import MyAccountPage from './MyAccount/MyAccountPage';
 
 
 const routes = mount({
@@ -20,6 +21,10 @@ const routes = mount({
   "/add": withAuthentication(route({
     title: 'Add Idea',
     view: <AddIdeaPage />
+  })),
+  "/me": withAuthentication(route({
+    title: "My Account",
+    view: <MyAccountPage />
   })),
   '/login': route({
     title: 'Login',

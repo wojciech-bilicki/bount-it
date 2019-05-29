@@ -31,5 +31,9 @@ export default class Api {
     return this.axiosInstance.request<T>(config);
   }
 
+  static delete(url: string, config?: AxiosRequestConfig) {
+    return this.axiosInstance.delete(url, config);
+  }
+
   private constructor() { }
 }

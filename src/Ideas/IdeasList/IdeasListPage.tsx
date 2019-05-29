@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../../Navigation/NavigationBar';
+import React, { useCallback, useEffect, useState } from 'react';
 import Api from '../../common/Api';
+import { Idea } from '../../common/types';
+import Layout from '../../Navigation/NavigationBar';
 
-interface Idea {
-  idea: string;
-  description: string;
-  id: string;
-}
 
-interface IdeasResponse {
-  data: Idea[];
-}
 
 const IdeasPage: React.FC = () => {
 
@@ -24,12 +17,16 @@ const IdeasPage: React.FC = () => {
     fetchIdeas();
   }, [])
 
+  const memoBookmark = useCallback(async (id:string) => {
+    await Api.post(`ideas/${id}/bookmark`)
+  }, [])
+
   return (
     <Layout>
       Ideas
       <table>
         <tbody>
-          {ideas.map(idea => <tr key={idea.id}><td>{idea.idea}</td><td>{idea.description}</td></tr>)}
+          {ideas.map(idea => <tr key={idea.id}><td>{idea.idea}</td><td>{idea.description}</td><td><button onClick={() => memoBookmark(idea.id)}>Bookmark</button></td></tr>)}
         </tbody>
       </table>
     </Layout>

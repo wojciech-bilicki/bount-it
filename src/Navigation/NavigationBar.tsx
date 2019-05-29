@@ -13,7 +13,7 @@ const Layout: React.FC = (props) => (
     <NavigationWrapper>
       <Link href="/">Ideas</Link>
       <Link href="/add">Add Idea</Link>
-      <Link href="/my-account">My Account</Link>
+      <Link href="/me">My Account</Link>
     </NavigationWrapper>
     <AppWrapper>
       {props.children}
