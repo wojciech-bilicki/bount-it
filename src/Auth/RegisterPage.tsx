@@ -1,43 +1,71 @@
 import React, { useState } from 'react';
 import { Link } from 'react-navi';
 import { onRegister } from './auth.api';
-import { AuthForm } from './Auth.components';
+import { AuthForm, ErrorParagraph, FooterParagraph, FormButton, Input } from './Auth.components';
+import AuthFormWrapper from './AuthFormWrapper';
 
 
 const RegisterPage: React.FC = () => {
 
-  const [{username, password}, setCredentials] = useState({
+  const [{username, password, repeatPassword}, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
+    repeatPassword: ''
   })
 
-  const register = (event: React.FormEvent) => {
+  
+  const [error, setError] = useState('');
+
+  const register = async (event: React.FormEvent) => {
     event.preventDefault()
-    onRegister({username, password});
+    if(password !== repeatPassword) {
+      setError(`Passwords don't match`)
+    }
+    const response = await onRegister({username, password});
+
+    if(response && response.error) {
+      setError(response.error);
+    }
   }
 
+
+
   return (
-    <div>
+    <AuthFormWrapper footer={
+      <FooterParagraph>{`Already registered? `}
+      <Link href="/login">Back to login</Link>
+      </FooterParagraph>
+    }>
       <AuthForm onSubmit={register}>
-        <label>Username</label>
-        <input value={username} onChange={(event) => {
+
+        <Input value={username} onChange={(event) => {
           setCredentials({
+            repeatPassword,
             password,
             username: event.target.value
           })
         }} placeholder="Username" />
-        <label>Password</label>
-        <input value={password} onChange={(event) => {
+        <Input value={password} onChange={(event) => {
           setCredentials({
+            repeatPassword,
             password: event.target.value,
             username
 
           })
         }} placeholder="Password" />
-        <button type="submit">Register</button>
+
+<Input value={repeatPassword} onChange={(event) => {
+          setCredentials({
+            password,
+            repeatPassword: event.target.value,
+            username
+
+          })
+        }} placeholder="Repeat password" />
+          {error && <ErrorParagraph>{error}<i className="material-icons">error</i></ErrorParagraph>}
+        <FormButton type="submit">Register</FormButton>
       </AuthForm>
-      <Link href="/login">Back to login</Link>
-    </div>
+      </AuthFormWrapper>
   )
 }
 

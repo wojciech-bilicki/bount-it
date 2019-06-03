@@ -16,9 +16,12 @@ const API_BASE_URL = 'http://165.22.88.139:4000'
 
 interface LoginResponse  {
   error?: string
+  token?: string;
 }
 
+
 export const onLogin = async (data: Credentials): Promise<LoginResponse | undefined> => {
+  
   const requestConfig: AxiosRequestConfig = {
     method: 'post',
     url: API_BASE_URL + '/login',
@@ -26,25 +29,31 @@ export const onLogin = async (data: Credentials): Promise<LoginResponse | undefi
   }
   try {
     const {data:response} = await axios.request<LoginApiResponse>(requestConfig);
-    storeToken(response.token);
+    return {token: response.token};
 
   } catch (e) {
     console.error(e.response);
     return {error: e.response.data.message};
-  }
-
-  
+  } 
 }
 
-export const onRegister = async (data: Credentials) => {
+interface RegisterResponse {
+  error: string;
+}
+
+export const onRegister = async (data: Credentials): Promise<RegisterResponse | undefined> => {
   const requestConfig: AxiosRequestConfig = {
     method: 'post',
     url: API_BASE_URL + '/register',
     data
   }
-
-  const {data: response} = await axios.request(requestConfig);
-  console.log(response);
+  try {
+    const {data: response} = await axios.request(requestConfig);
+    
+  } catch (e) {
+    console.error(e.response);
+    return {error: e.response.data.message};
+  }
 }
 
 export const BOUNCE_IT_TOKEN_KEY = 'bounce_it_token_key'

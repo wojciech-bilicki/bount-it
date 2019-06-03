@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigation } from 'react-navi';
-import { BOUNCE_IT_TOKEN_KEY, onLogin } from './auth.api';
-import { AuthForm } from './Auth.components';
+import { onLogin } from './auth.api';
+import { AuthForm, ErrorParagraph, FooterParagraph, ForgotPassword, FormButton, Input } from './Auth.components';
+import AuthFormWrapper from './AuthFormWrapper';
+
 
 const App: React.FC = () => {
   let navigation = useNavigation();
@@ -23,31 +25,34 @@ const App: React.FC = () => {
     if (response && response.error) {
       setError(response.error);
     } else {
-      navigation.setContext({token:  localStorage.getItem(BOUNCE_IT_TOKEN_KEY)})
+      navigation.setContext({token:  response!.token})
       navigation.navigate('/')
     }
 
   }
   return (
-    <div className="App">
-      <AuthForm onSubmit={login}>
-        <label htmlFor="username">Username</label>
-        <input placeholder="Username" value={username} onChange={(event) => setCredentials({
+    <AuthFormWrapper footer={ <FooterParagraph>{`Need an account? `}
+    <Link href="/register">Register now</Link>
+    </FooterParagraph>
+    }>
+      <AuthForm autoComplete="asdas" onSubmit={login}>
+        <Input name="sadat" autoComplete="loasdagin"  placeholder="Username" value={username} onChange={(event) => setCredentials({
           username: event.target.value,
           password
         })} />
-        <label htmlFor="password">Password</label>
-        <input placeholder="Password" value={password} onChange={(event) => {
+        <Input name="asdassd" autoComplete="user-asdsda"  placeholder="Password" value={password} onChange={(event) => {
           setCredentials({
             username,
             password: event.target.value
           })
-        }}></input>
-        <button type="submit">Login</button>
-        {error && <p>Invalid username/password</p>}
-      </AuthForm>
-      <Link href="/register">Go to register</Link>
-    </div>
+        }}/>
+          {error && <ErrorParagraph>Incorrect username/password<i className="material-icons">error</i></ErrorParagraph>}
+        <FormButton type="submit">Login</FormButton>       
+        <ForgotPassword>Forgot your password?</ForgotPassword>
+
+      </ AuthForm>
+      </AuthFormWrapper>
+    
   );
 }
 
