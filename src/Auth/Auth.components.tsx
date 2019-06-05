@@ -70,7 +70,7 @@ export const AuthForm = styled.form`
     font-weight: bold;
   }
 
-  Input:nth-last-of-type(){
+  Input:nth-last-of-type {
   
     margin-top: 32px;
   }

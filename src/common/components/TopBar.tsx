@@ -9,6 +9,23 @@ const TopBarWrapper = styled.header`
   display: flex;
   padding: 24px 32px;
   background-color: ${ColorSet.MAIN_VIOLET};
+  align-items: center;
+  justify-content: space-between;
+
+  i {
+    cursor: pointer;
+    font-size: 2em;
+    color: white;
+
+    &:hover {
+      color: ${ColorSet.LIGHT_VIOLET}
+    }
+  }
+  
+  i:nth-last-of-type {
+    margin-left: 16px;
+  }
+  
 `;
 
 
@@ -65,8 +82,10 @@ const TopBar = () => (
     </ MenuButton> 
 
     <img src={Logo} />
-    <i className="material-icons">search</i>
-    <i className="material-icons">account_circle</i>
+    <div>
+      <i className="material-icons">search</i>
+      <i className="material-icons">account_circle</i>
+    </div>
   </TopBarWrapper>
 )
 

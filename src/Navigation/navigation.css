@@ -1,0 +1,14 @@
+.link {
+  background-color: #f895a0;
+  text-transform: capitalize;
+  color: white;
+  min-width: 150px;
+  text-align: center;
+  text-decoration: none;
+  padding: 16px;
+  border-radius: 32px;
+}
+
+.active-link {
+  background-color: #f44e61;
+}
