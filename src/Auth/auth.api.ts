@@ -29,6 +29,7 @@ export const onLogin = async (data: Credentials): Promise<LoginResponse | undefi
   }
   try {
     const {data:response} = await axios.request<LoginApiResponse>(requestConfig);
+    storeToken(response.token);
     return {token: response.token};
 
   } catch (e) {

@@ -5,7 +5,6 @@ export default class Api {
   private static axiosInstance: AxiosInstance;
 
   static async init() {
-    console.log(process.env.REACT_APP_API_BASE_URL);
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_API_BASE_URL
     });

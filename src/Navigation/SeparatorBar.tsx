@@ -14,7 +14,6 @@ const Separator = styled.span`
 `;
 
 const Bar = styled.span`
-
     display: block;
     height: 7px;
     width: 182px;
@@ -30,11 +29,11 @@ interface Props {
 }
 
 
-const SeparatorBar = ({calcCssFn}: Props) => {
+const SeparatorBar = () => {
   const barElement = useRef(null);
   return (
     <Separator>
-    <Bar key="aaa" style={{left: calcCssFn}} ref={barElement} />
+    
   </Separator>
   )
 

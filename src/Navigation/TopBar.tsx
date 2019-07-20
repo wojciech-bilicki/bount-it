@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../../assets/logo-light.png';
+import Logo from '../assets/logo-light.png';
 import { ColorSet } from '../Colors';
-
 
 
 const TopBarWrapper = styled.header`
   display: flex;
   padding: 24px 32px;
-  background-color: ${ColorSet.MAIN_VIOLET};
   align-items: center;
   justify-content: space-between;
+  background-color: ${ColorSet.MAIN_VIOLET};
 
   i {
     cursor: pointer;
@@ -20,24 +19,25 @@ const TopBarWrapper = styled.header`
     &:hover {
       color: ${ColorSet.LIGHT_VIOLET}
     }
+
+    &::last-of-type {
+      margin-left: 16px;
+    }
   }
-  
-  i:nth-last-of-type {
+
+  i:last-child {
     margin-left: 16px;
   }
   
 `;
 
-
 const MenuButton = styled.button`
   background-color: transparent;
-  height: 3rem;
   width: 3rem;
-  border: none;
-  /* border-radius: 50%; */
+  height:3rem;
   outline: none;
-  cursor: pointer;
-  
+  cursor: pointer;  
+  border: none;
 `;
 
 const MenuToggle = styled.span`
@@ -45,42 +45,44 @@ const MenuToggle = styled.span`
   width: 2rem;
   height: 2px;
   background-color: white;
-  position: relative;
-  margin: auto;
   border-radius: 3px;
   background-color: ${ColorSet.MAIN_PINK};
+  position: relative;
+  margin: auto;
 
   &::after, &::before {
-    background-color: ${ColorSet.MAIN_PINK};
-    height: 2px;
-    width: 2rem;
+    background-color: inherit;
+    height: inherit;
+    width: inherit;
+    border-radius: inherit;
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     bottom: 0;
     margin: auto;
-}
+  }
 
   &::after {
-  top: 1.25rem;
+    top: 1.25rem;
   }
 
   &::before {
-  top: -1.3rem;
-}
-
+    top: -1.3rem;
+  }
 `;
 
 
+interface Props {
+  toggleVisibility: () => void;
+}
 
-const TopBar = () => (
+const TopBar: React.FC<Props> = ({toggleVisibility}) => (
   <TopBarWrapper>
-    <MenuButton >
-    <MenuToggle />
-    </ MenuButton> 
-
+    <MenuButton  onClick={toggleVisibility}>
+      <MenuToggle />
+    </MenuButton>
     <img src={Logo} />
     <div>
       <i className="material-icons">search</i>

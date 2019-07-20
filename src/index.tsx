@@ -22,28 +22,28 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
-const routes = mount({
-  '/': withAuthentication(route({
-    title: 'Ideas',
-    view: <IdeasPage />
-  })),
-  "/add": withAuthentication(route({
-    title: 'Add Idea',
-    view: <AddIdeaPage />
-  })),
-  "/me": withAuthentication(route({
-    title: "My Account",
-    view: <MyAccountPage />
-  })),
-  '/login': route({
-    title: 'Login',
-    view: <LoginPage />
-  }),
-  "/register": route({
-    title: "Register",
-    view: <RegisterPage />
-  }),
-})
+const mainRoutes  = mount({
+    '/': withAuthentication(route({
+      title: 'Ideas',
+      view: <IdeasPage />
+    })),
+    "/add": withAuthentication(route({
+      title: 'Add Idea',
+      view: <AddIdeaPage />
+    })),
+    "/me": withAuthentication(route({
+      title: "My Account",
+      view: <MyAccountPage />
+    })),
+    '/login': route({
+      title: 'Login',
+      view: <LoginPage />
+    }),
+    "/register": route({
+      title: "Register",
+      view: <RegisterPage />
+    }),
+  });
 
 Api.init();
 
@@ -52,7 +52,7 @@ ReactDOM.render(<>
 <GlobalStyles />
 <Router context={{
   token: localStorage.getItem(BOUNCE_IT_TOKEN_KEY)
-}} routes={routes} /></>, document.getElementById('root'));
+}} routes={mainRoutes} /></>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

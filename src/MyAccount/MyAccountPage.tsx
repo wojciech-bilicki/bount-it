@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../Navigation/NavigationBar';
+import Layout from '../Navigation/Layout';
 import { useMyAccount } from './myAccount.hooks';
 
 
